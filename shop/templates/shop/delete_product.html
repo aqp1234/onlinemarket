@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Delete Product{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>삭제 후에는 복구가 불가합니다. 삭제하시겠습니까?</h1>
+    <h3>상품명 : {{ product.name }}</h3>
+    <h3>상품가격 : {{ product.price }}</h3>
+    <img src="{{ product.image.url }}" alt="{{ product.name }}" style="width: 200px; height:auto">
+    <form action="" method="POST">
+        {% csrf_token %}
+        <input type="submit" value="Delete">
+    </form>
+    <button onclick="history.back()">Back</button>
+</div>
+{% endblock %}

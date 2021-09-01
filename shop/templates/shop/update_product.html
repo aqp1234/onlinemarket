@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Update Product{% endblock %}
+
+{% block content %}
+<form action="" method="post" enctype="multipart/form-data">
+    {{ form.as_p }}
+    <div>
+        <div>등록된 사진</div>
+        <div>{{ product.image.name }}<img src="{{ product.image.url }}" style="width: 80px; height: 80px;"></div>
+        <span><a href="{{ product.image.url }}" target="_blank">click to show img</a></span>
+        <input type="checkbox" name="delete_image" value="{{ product.image.id }}" id="id_delete_image">
+    </div>
+    {% csrf_token %}
+    <input type="submit" value="Update">
+</form>
+{% endblock %}

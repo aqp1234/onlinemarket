@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}Detail Product{% endblock %}
+
+{% block style %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'detail_product.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <img class="detail-product-img" src="{{ product.image.url }}" alt="{{ product.name }}">
+    <div class="detail-product-info">
+        <div class="detail-product-seller">{{ product.user.name }}</div>
+        <div class="detail-product-name">{{ product.name }}</div>
+        <div class="detail-product-price">{{ product.price }}</div>
+        <ul class="detail-ul">
+            <li class="product-cart"><a href="#">Add Cart</a></li>
+            <li class="product-detail"><a href="#">Purchase</a></li>
+        </ul>
+    </div>
+    <div class="tab-nav">
+        <ul>
+            <li class="tab-nav-item"><a href="#">상세설명</a></li>
+            <li class="tab-nav-item"><a href="#">상품평</a></li>
+            <li class="tab-nav-item"><a href="#">상품문의</a></li>
+            {% if product.user == user %}
+                <li class="tab-nav-item manager" style="float:right"><a href="{% url 'shop:delete_product' product.id %}">상품 삭제</a></li>
+                <li class="tab-nav-item manager" style="float:right"><a href="{% url 'shop:update_product' product.id %}">상품 수정</a></li>
+            {% endif %}
+        </ul>
+    </div>
+    <div class="tab-content">
+
+    </div>
+</div>
+{% endblock %}

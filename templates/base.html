@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <title>{% block title %}{% endblock %}</title>
+    {% block script %}
+    {% endblock %}
+    {% block style %}
+    {% endblock %}
+    <link rel="stylesheet" href="{% static 'nav.css' %}" type="text/css">
+</head>
+<body>
+    <div class="nav-div">
+        <nav>
+            <ul class="nav-container">
+                <li class="nav-item"><a href="/">Online Market</a></li>
+                <li class="nav-item"><a href="#">식품</a></li>
+                <li class="nav-item"><a href="#">도서</a></li>
+                <li class="nav-item"><a href="#">의류</a></li>
+                <li class="nav-item"><a href="#">디지털</a></li>
+                <li class="nav-item"><a href="#">자동차</a></li>
+                <li class="nav-item"><a href="#">티켓</a></li>
+                {% if not user.is_authenticated %}
+                    <li class="nav-item" style="float:right"><a href="{% url 'accounts:register' %}">회원가입</a></li>
+                    <li class="nav-item" style="float:right"><a href="{% url 'accounts:login' %}">로그인</a></li>
+                {% else %}
+                    <li class="nav-item" style="float:right"><a href="{% url 'accounts:logout' %}">로그아웃</a></li>
+                    <li class="nav-item" style="float:right"><span>{{ user.username }}님 안녕하세요.</span></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+
+    <div>
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+</html>
