@@ -28,6 +28,7 @@
                     <li class="nav-item" style="float:right"><a href="{% url 'accounts:login' %}">로그인</a></li>
                 {% else %}
                     <li class="nav-item" style="float:right"><a href="{% url 'accounts:logout' %}">로그아웃</a></li>
+                    <li class="nav-item" style="float:right"><a href="{% url 'shop:add_product' %}">상품추가</a></li>
                     <li class="nav-item" style="float:right"><span>{{ user.username }}님 안녕하세요.</span></li>
                 {% endif %}
             </ul>
