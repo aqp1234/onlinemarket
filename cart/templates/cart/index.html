@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}Cart{% endblock %}
+
+{% block content %}
+<div class="container">
+    {% for cartitem in cartitems %}
+        <div>
+            {{ cartitem.product.name }}
+            {{ cartitem.product.price }}
+            {{ cartitem.quantity }}
+            {{ cartitem.get_product_total }}
+            <a href="{% url 'cart:delete_cart' cartitem.product.id %}">상품 삭제</a>
+        </div>
+    {% endfor %}
+    <div>최종가격</div>
+    {{ cart.get_cart_total }}
+    <div><a href="#">구매하기</a></div>
+</div>
+{% endblock %}
