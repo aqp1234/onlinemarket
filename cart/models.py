@@ -15,6 +15,12 @@ class Cart(models.Model):
         for item in self.cartitems.all():
             total += item.get_product_total()
         return total
+    
+    def get_quantity(self):
+        quantity = 0
+        for item in self.cartitems.all():
+            quantity += item.quantity
+        return quantity
 
 class CartItem(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)

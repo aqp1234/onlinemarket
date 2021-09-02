@@ -16,7 +16,7 @@
             <div class="product-name">{{ product.name }}</div>
             <ul>
                 <li class="product-detail"><a href="{% url 'shop:detail_product' product.id %}">Show Detail</a></li>
-                <li class="product-cart"><a href="#">Add Cart</a></li>
+                <li class="product-cart"><a href="{% url 'cart:add_cart' product.id %}">Add Cart</a></li>
             </ul>
         </div>
     {% endfor %}
