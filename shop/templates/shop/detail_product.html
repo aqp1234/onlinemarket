@@ -38,8 +38,23 @@
             </div>
         {% endfor %}
     </div>
-    <div class="tab-review" id="tab-review">
-
+    <div class="tab-review" id="tab-review" width="100%">
+        <div>상품평작성</div>
+        <form action="{% url 'review:add_review' product.id %}" method="post">
+            {% csrf_token %}
+            <textarea name="review" id="review" cols="149" rows="10" style="resize: vertical;"></textarea>
+            <input type="submit" value="댓글 등록">
+        </form>
+        {% for review in reviews %}
+            <div class="review-item">
+                <div>작성자 : <span>{{ review.user.username }}</span></div>
+                <div>댓글 : <div style="border: 1px solid black">{{ review.review }}</div></div>
+                <div>작성날짜 : {{ review.updated|date:'Y-m-d' }}</div>
+                {% if user == review.user %}
+                    <a href="{% url 'review:delete_review' review.id %}">댓글 삭제</a>
+                {% endif %}
+            </div>
+        {% endfor %}
     </div>
 </div>
 {% endblock %}

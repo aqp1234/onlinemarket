@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from review.models import Review
 from .models import Product, Category, ProductDetail
 from .forms import *
 
@@ -36,7 +37,8 @@ def add_product(request):
 def detail_product(request, product_id):
     product = get_object_or_404(Product, id=product_id)
     product_details = ProductDetail.objects.filter(product=product)
-    return render(request, 'shop/detail_product.html', {'product': product, 'product_details': product_details})
+    reviews = Review.objects.filter(product=product)
+    return render(request, 'shop/detail_product.html', {'product': product, 'product_details': product_details, 'reviews': reviews})
 
 def update_product(request, product_id):
     product = get_object_or_404(Product, id=product_id)
