@@ -8,4 +8,5 @@
     {% csrf_token %}
     <input type="submit" value="Add">
 </form>
+<a href="{% url 'shop:delete_product_detail' product.id %}">사진 삭제</a>
 {% endblock %}

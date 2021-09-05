@@ -10,4 +10,5 @@ urlpatterns = [
     path('update_product/<int:product_id>', update_product, name='update_product'),
     path('delete_product/<int:product_id>', delete_product, name='delete_product'),
     path('add_product_detail/<int:product_id>', add_product_detail, name='add_product_detail'),
+    path('delete_product_detail/<int:product_id>', delete_product_detail, name='delete_product_detail'),
 ]

@@ -86,5 +86,17 @@ def add_product_detail(request, product_id):
         return redirect('/')
     else:
         form = ProductDetailForm()
-        return render(request, 'shop/add_product_detail.html', {'form': form})
+        return render(request, 'shop/add_product_detail.html', {'form': form, 'product': product})
+
+def delete_product_detail(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+    product_details = ProductDetail.objects.filter(product=product)
+    if request.method == 'POST':
+        image_id_list = request.POST.getlist('delete_image[]')
+        image_list = ProductDetail.objects.filter(id__in=image_id_list)
+        for image in image_list:
+            image.delete()
+        return redirect('shop:delete_product_detail', product_id=product_id)
+    else:
+        return render(request, 'shop/delete_product_detail.html', {'product_details': product_details})
 

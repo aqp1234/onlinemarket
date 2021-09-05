@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}Delete Product Detail{% endblock %}
+
+{% block content %}
+<div class="container">
+    <form action="" method="post">
+        {% for product_detail in product_details %}
+            <div class="detail-item">
+                <span>{{ product_detail.image.filename }}</span>
+                <img src="{{ product_detail.image.url }}" width="200px" height="auto">
+                <input type="checkbox" name="delete_image[]" value="{{ product_detail.id }}">사진삭제하기
+            </div>
+        {% endfor %}
+        {% csrf_token %}
+        <input type="submit" value="삭제">
+    </form>
+</div>
+{% endblock %}
