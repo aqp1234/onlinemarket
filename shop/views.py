@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Product, Category
+from .models import Product, Category, ProductDetail
 from .forms import *
 
 # Create your views here.
@@ -35,7 +35,8 @@ def add_product(request):
 
 def detail_product(request, product_id):
     product = get_object_or_404(Product, id=product_id)
-    return render(request, 'shop/detail_product.html', {'product': product})
+    product_details = ProductDetail.objects.filter(product=product)
+    return render(request, 'shop/detail_product.html', {'product': product, 'product_details': product_details})
 
 def update_product(request, product_id):
     product = get_object_or_404(Product, id=product_id)
@@ -73,4 +74,17 @@ def delete_product(request, product_id):
         return redirect('/')
     else:
         return render(request, 'shop/delete_product.html', {'product': product})
+
+def add_product_detail(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+    if request.method == 'POST':
+        form = ProductDetailForm(request.POST, request.FILES)
+        if form.is_valid():
+            new_product_detail = ProductDetail.objects.create(product=product, image=form.cleaned_data['image'])
+            new_product_detail.save()
+            return redirect('shop:detail_product', product_id=product_id)
+        return redirect('/')
+    else:
+        form = ProductDetailForm()
+        return render(request, 'shop/add_product_detail.html', {'form': form})
 

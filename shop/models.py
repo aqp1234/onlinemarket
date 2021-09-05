@@ -33,3 +33,13 @@ class Product(models.Model):
 
     class Meta:
         ordering = ['-updated']
+
+class ProductDetail(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='details')
+    image = models.ImageField(upload_to='product_details/%Y/%m/%d')
+
+    def __str__(self):
+        return self.product.name + '' + str(self.id)
+
+    class Meta:
+        ordering = ['id']

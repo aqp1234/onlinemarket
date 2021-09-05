@@ -16,4 +16,7 @@ class ProductForm(forms.Form):
     stock = forms.IntegerField(validators=[MinValueValidator(0)])
     available_display = forms.BooleanField()
     available_order = forms.BooleanField()
+
+class ProductDetailForm(forms.Form):
+    image = forms.ImageField()
     

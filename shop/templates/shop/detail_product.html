@@ -21,16 +21,24 @@
     </div>
     <div class="tab-nav">
         <ul>
-            <li class="tab-nav-item"><a href="#">상세설명</a></li>
-            <li class="tab-nav-item"><a href="#">상품평</a></li>
+            <li class="tab-nav-item"><a href="#tab-content">상세설명</a></li>
+            <li class="tab-nav-item"><a href="#tab-review">상품평</a></li>
             <li class="tab-nav-item"><a href="#">상품문의</a></li>
             {% if product.user == user %}
                 <li class="tab-nav-item manager" style="float:right"><a href="{% url 'shop:delete_product' product.id %}">상품 삭제</a></li>
                 <li class="tab-nav-item manager" style="float:right"><a href="{% url 'shop:update_product' product.id %}">상품 수정</a></li>
+                <li class="tab-nav-item manager" style="float:right"><a href="{% url 'shop:add_product_detail' product.id %}">상품 상세설명 사진 추가</a></li>
             {% endif %}
         </ul>
     </div>
-    <div class="tab-content">
+    <div class="tab-product-detail" id="tab-product-detail">
+        {% for product_detail in product_details %}
+            <div class="detail_img">
+                <img src="{{product_detail.image.url}}" width="100%" height="auto">
+            </div>
+        {% endfor %}
+    </div>
+    <div class="tab-review" id="tab-review">
 
     </div>
 </div>
